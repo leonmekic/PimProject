@@ -1,0 +1,63 @@
+{% extends "mylayout.html.twig" %}
+
+{% block content %}
+    <a href="/{{ app.request.getLocale() }}/companies">{{ 'go.back'|trans }}</a>
+    <table style="width:100%">
+        <tr>
+            <th style="border: 2px solid black">
+                <div style="display: inline-block; margin-right: 20px"><h2>{{ 'object.name'|trans }}</h2></div>
+            </th>
+            <th style="border: 2px solid black">
+                <div style="display: inline-block; margin-right: 20px"><h2>{{ 'object.address'|trans }}</h2></div>
+            </th>
+            <th style="border: 2px solid black">
+                <div style="display: inline-block; margin-right: 20px"><h2>Logo</h2></div>
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        <div>
+                <tr>
+                    <td>
+                        <div style="display: inline-block; margin-right: 20px"><h2>{{ item.name }}</h2></div>
+                    </td>
+                    <td>
+                        <div style="display: inline-block; margin-right: 20px"><h2>{{ item.address }}</h2>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display: inline-block; margin-right: 20px"><img src="{{ item.getLogo.getThumbnail('galleryThumbnail') }}"/></div>
+                    </td>
+                    <td>
+                        <div style="display: inline-block; margin-right: 20px"><a href="/{{ app.request.getLocale() }}/companies/{{ item.getId }}/article/decrease">{{ 'decrease.amount'|trans }}</a></div>
+                    </td>
+                </tr>
+
+        </div>
+    </table>
+    <table style="width:100%">
+        <div>
+            <tr>
+                <th style="border: 2px solid red">
+                    <div style="display: inline-block; margin-right: 20px"><h2>{{ 'category.name'|trans }}</h2></div>
+                </th>
+                <th>
+                    <div style="display: inline-block; margin-right: 20px"></div>
+                </th>
+            </tr>
+            {% for category in categories %}
+                <tr>
+                    <td>
+                        <div style="display: inline-block; margin-right: 20px"><h2><a
+                                        href="/{{ app.request.getLocale() }}/companies/{{ item.getId }}/articles?category={{ category.getId }}">{{ category.name }}</a>
+                            </h2></div>
+                    </td>
+                    <td>
+                        <div style="display: inline-block"><a href="/{{ app.request.getLocale() }}/companies/{{ item.getId }}/article/add?category={{ category.getId }}">{{ 'add.new.article'|trans }}</a></div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </div>
+    </table>
+{% endblock %}

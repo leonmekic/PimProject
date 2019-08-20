@@ -1,0 +1,48 @@
+{% extends "mylayout.html.twig" %}
+
+{% block content %}
+    <div>
+        <a href="/{{ app.request.getLocale() }}/companies/{{ companyId }}">{{ 'go.back'|trans }}</a>
+        {% if articles %}
+            <table style="width:100%">
+                <tr>
+                    <th style="border: 2px solid green">
+                        <div style="display: inline-block; margin-right: 20px"><h2>{{ 'article.name'|trans }}</h2></div>
+                    </th>
+                    <th style="border: 2px solid green">
+                        <div style="display: inline-block; margin-right: 20px"><h2>{{ 'object.description'|trans }}</h2></div>
+                    </th>
+                    <th style="border: 2px solid green">
+                        <div style="display: inline-block; margin-right: 20px"><h2>{{ 'object.quantity'|trans }}</h2></div>
+                    </th>
+                </tr>
+                <form action="{{ path('change') }}" method="post">
+                    {% for article in articles %}
+                        <tr>
+                            <td>
+                                <div style="display: inline-block; margin-right: 20px"><h2>{{ article.name }}</h2></div>
+                            </td>
+                            <td>
+                                <div style="display: inline-block; margin-right: 20px"><h2>{{ article.description|raw }}</h2></div>
+                            </td>
+                            <td>
+                                <input type="number" min="0" name="{{ article.id }}-{{ article.name }}" value="{{ article.quan }}">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>
+                            <input type="hidden" id="category_id" name="category_id" value="{{ categoryId }}">
+                        </td>
+                        <td>
+                            <input type="hidden" id="company_id" name="company_id" value="{{ companyId }}">
+                        </td>
+                        <td>
+                            <input type="submit" value="{{ 'article.submit'|trans }}">
+                        </td>
+                    </tr>
+                </form>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

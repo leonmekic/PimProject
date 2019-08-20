@@ -1,0 +1,25 @@
+{% extends "mylayout.html.twig" %}
+
+{% block content %}
+    <table style="width:100%">
+        {% for item in items %}
+
+            <tr>
+                <td>
+                    <div style="display: inline-block; margin-right: 20px"><h2><a href="/{{ app.request.getLocale() }}/companies/{{ item.getId }}"> {{ 'object.name'|trans }}: {{ item.name }}</a></h2></div>
+                </td>
+                <td>
+                    <div style="display: inline-block; margin-right: 20px"><h2>{{ 'object.address'|trans }}: {{ item.address }}</h2></div>
+                </td>
+                <td>
+                    <div style="display: inline-block; margin-right: 20px"><img src="{{ item.getLogo.getThumbnail('galleryThumbnail') }}"/></div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% for i in pimcore_iterate_block(pimcore_block('contentblock')) %}
+        <h2>{{ pimcore_input('subline') }}</h2>
+        {{ pimcore_wysiwyg('content') }}
+    {% endfor %}
+{% endblock %}
+

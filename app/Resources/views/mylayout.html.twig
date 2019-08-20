@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/global.css" />
+</head>
+<body>
+<div id="content" style="padding: 100px; border: 2px solid indianred; text-align: center">{% block content %}{% endblock %}</div>
+{% for message in app.flashes('notice') %}
+    <div class="flash-notice">
+        Message : {{ message }}
+    </div>
+{% endfor %}
+</body>
+</html>
